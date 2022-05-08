@@ -42,7 +42,7 @@ setup(
     entry_points={
         "wai.annotations.plugins": [
             # ISPs
-            "add-annotation-overlay-od=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayISPSpecifier",
+            "add-annotation-overlay-od=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayODISPSpecifier",
             # Sinks
             "image-viewer=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerSinkSpecifier",
         ]

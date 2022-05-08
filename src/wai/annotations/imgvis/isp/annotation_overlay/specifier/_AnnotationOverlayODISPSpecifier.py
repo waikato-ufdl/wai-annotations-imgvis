@@ -5,7 +5,7 @@ from wai.annotations.core.domain import DomainSpecifier
 from wai.annotations.core.specifier import ProcessorStageSpecifier
 
 
-class AnnotationOverlayISPSpecifier(ProcessorStageSpecifier):
+class AnnotationOverlayODISPSpecifier(ProcessorStageSpecifier):
     """
     Specifies the annotation_overlay image ISP.
     """
@@ -29,5 +29,5 @@ class AnnotationOverlayISPSpecifier(ProcessorStageSpecifier):
 
     @classmethod
     def components(cls) -> Tuple[Type[ProcessorComponent]]:
-        from wai.annotations.imgvis.isp.annotation_overlay.component import AnnotationOverlay
-        return AnnotationOverlay,
+        from wai.annotations.imgvis.isp.annotation_overlay.component import AnnotationOverlayOD
+        return AnnotationOverlayOD,

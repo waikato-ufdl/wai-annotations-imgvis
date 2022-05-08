@@ -253,7 +253,7 @@ def text_color(color, threshold=128):
         return 255, 255, 255
 
 
-class AnnotationOverlay(
+class AnnotationOverlayOD(
     RequiresNoFinalisation,
     ProcessorComponent[ImageObjectDetectionInstance, ImageObjectDetectionInstance]
 ):
