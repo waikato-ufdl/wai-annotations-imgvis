@@ -49,10 +49,9 @@ Displays images.
 
 #### Options:
 ```
-usage: image-viewer [--close-window] [--delay DELAY] [--position POSITION] [--size SIZE] [--title TITLE]
+usage: image-viewer [--delay DELAY] [--position POSITION] [--size SIZE] [--title TITLE]
 
 optional arguments:
-  --close-window       closes the window automatically once all images have been processed
   --delay DELAY        the delay in milli-seconds between images, use 0 to wait for keypress, ignored if <0
   --position POSITION  the position of the window on screen (X,Y)
   --size SIZE          the maximum size for the image: WIDTH,HEIGHT
