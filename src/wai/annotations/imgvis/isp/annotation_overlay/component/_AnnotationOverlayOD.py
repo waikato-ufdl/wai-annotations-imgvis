@@ -9,8 +9,7 @@ from wai.annotations.core.stream import ThenFunction, DoneFunction
 from wai.annotations.core.stream.util import RequiresNoFinalisation
 from wai.annotations.domain.image import Image
 from wai.annotations.domain.image.object_detection import ImageObjectDetectionInstance
-from wai.annotations.imgvis.isp.annotation_overlay.component._colors import default_colors, \
-    text_color
+from wai.annotations.imgvis.isp.annotation_overlay.component._colors import default_colors, text_color
 from wai.annotations.imgvis.isp.annotation_overlay.component._fonts import DEFAULT_FONT_FAMILY, load_font
 
 
