@@ -23,7 +23,7 @@ class AnnotationOverlayODISPSpecifier(ProcessorStageSpecifier):
             return input_domain
         else:
             raise Exception(
-                f"AnnotationOverlay only handles the following domains: "
+                f"AnnotationOverlayOD only handles the following domains: "
                 f"{ImageObjectDetectionDomainSpecifier.name()}"
             )
 
