@@ -1,4 +1,3 @@
-from abc import ABC
 from typing import Type, Tuple
 
 from wai.annotations.core.component import Component
@@ -6,7 +5,7 @@ from wai.annotations.core.domain import DomainSpecifier
 from wai.annotations.core.specifier import SinkStageSpecifier
 
 
-class AnnotationOverlayODOutputFormatSpecifier(SinkStageSpecifier, ABC):
+class AnnotationOverlayODOutputFormatSpecifier(SinkStageSpecifier):
     """
     Base specifier for the label-dist in each known domain.
     """
