@@ -11,7 +11,7 @@ class ImageViewerODSinkSpecifier(SinkStageSpecifier):
     """
     @classmethod
     def description(cls) -> str:
-        return "Displays images."
+        return "Displays object detection images."
 
     """
     Specifier for label-dist in the object-detection domain.

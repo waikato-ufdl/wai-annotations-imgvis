@@ -11,7 +11,7 @@ class ImageViewerISSinkSpecifier(SinkStageSpecifier):
     """
     @classmethod
     def description(cls) -> str:
-        return "Displays images."
+        return "Displays image segmentation images."
 
     """
     Specifier for label-dist in the image segmentation domain.
