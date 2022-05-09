@@ -51,9 +51,10 @@ Adds object detection overlays to images passing through.
 
 #### Options:
 ```
-usage: add-annotation-overlay-od [--fill] [--fill-alpha FILL_ALPHA] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--force-bbox] [--label-key LABEL_KEY] [--labels LABELS] [--num-decimals NUM_DECIMALS] [--outline-alpha OUTLINE_ALPHA] [--outline-thickness OUTLINE_THICKNESS] [--text-format TEXT_FORMAT] [--text-placement TEXT_PLACEMENT] [--vary-colors]
+usage: add-annotation-overlay-od [--colors COLORS] [--fill] [--fill-alpha FILL_ALPHA] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--force-bbox] [--label-key LABEL_KEY] [--labels LABELS] [--num-decimals NUM_DECIMALS] [--outline-alpha OUTLINE_ALPHA] [--outline-thickness OUTLINE_THICKNESS] [--text-format TEXT_FORMAT] [--text-placement TEXT_PLACEMENT] [--vary-colors]
 
 optional arguments:
+  --colors COLORS       the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors
   --fill                whether to fill the bounding boxes/polygons
   --fill-alpha FILL_ALPHA
                         the alpha value to use for the filling (0: transparent, 255: opaque).

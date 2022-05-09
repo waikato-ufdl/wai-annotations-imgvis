@@ -70,6 +70,13 @@ class AnnotationOverlayOD(
         help="the number of decimals to use for float numbers in the text format string."
     )
 
+    colors: str = TypedOption(
+        "--colors",
+        type=str,
+        default="",
+        help="the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors"
+    )
+
     outline_thickness: int = TypedOption(
         "--outline-thickness",
         type=int,
@@ -113,6 +120,11 @@ class AnnotationOverlayOD(
         self._colors = dict()
         self._default_colors = default_colors()
         self._default_colors_index = 0
+        self._custom_colors = []
+        if len(self.colors) > 0:
+            for color in self.colors.split(" "):
+                self._custom_colors.append([int(x) for x in color.split(",")])
+        self._label_mapping = dict()
         self._font = load_font(self.logger, self.font_family, self.font_size)
         self._text_vertical, self._text_horizontal = self.text_placement.upper().split(",")
         self._accepted_labels = None
@@ -142,7 +154,14 @@ class AnnotationOverlayOD(
         :rtype: tuple
         """
         if label not in self._colors:
-            self._colors[label] = self._next_default_color()
+            has_custom = False
+            if label in self._label_mapping:
+                index = self._label_mapping[label]
+                if index < len(self._custom_colors):
+                    has_custom = True
+                    self._colors[label] = self._custom_colors[index]
+            if not has_custom:
+                self._colors[label] = self._next_default_color()
         return self._colors[label]
 
     def _get_outline_color(self, label):
@@ -247,6 +266,8 @@ class AnnotationOverlayOD(
             if self._accepted_labels is not None:
                 if label not in self._accepted_labels:
                     continue
+            if label not in self._label_mapping:
+                self._label_mapping[label] = len(self._label_mapping)
             if self.vary_colors:
                 color_label = "object-%d" % i
             else:
