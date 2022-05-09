@@ -1,8 +1,7 @@
 import io
 import PIL
 
-from matplotlib import font_manager
-from PIL import ImageDraw, ImageFont
+from PIL import ImageDraw
 
 from wai.common.cli.options import TypedOption, FlagOption
 from wai.annotations.core.component import ProcessorComponent
@@ -10,8 +9,9 @@ from wai.annotations.core.stream import ThenFunction, DoneFunction
 from wai.annotations.core.stream.util import RequiresNoFinalisation
 from wai.annotations.domain.image import Image
 from wai.annotations.domain.image.object_detection import ImageObjectDetectionInstance
-from wai.annotations.imgvis.isp.annotation_overlay.component._colors import DEFAULT_FONT_FAMILY, default_colors, \
+from wai.annotations.imgvis.isp.annotation_overlay.component._colors import default_colors, \
     text_color
+from wai.annotations.imgvis.isp.annotation_overlay.component._fonts import DEFAULT_FONT_FAMILY, load_font
 
 
 class AnnotationOverlayOD(
@@ -53,7 +53,7 @@ class AnnotationOverlayOD(
     font_family: str = TypedOption(
         "--font-family",
         type=str,
-        default="sans\\-serif",
+        default=DEFAULT_FONT_FAMILY,
         help="the name of the TTF font-family to use, note: any hyphens need escaping with backslash."
     )
 
@@ -107,27 +107,6 @@ class AnnotationOverlayOD(
         help="whether to force a bounding box even if there is a polygon available"
     )
 
-    def _load_font(self, family, size):
-        """
-        Attempts to instantiate the specified font family.
-
-        :param family: the TTF font family
-        :type family: str
-        :param size: the size to use
-        :type size: int
-        :return: the Pillow font
-        """
-        try:
-            mpl_font = font_manager.FontProperties(family=family)
-            font_file = font_manager.findfont(mpl_font)
-            return ImageFont.truetype(font_file, size)
-        except:
-            self.logger.warning("Failed to instantiate font family '%s', falling back on '%s'" % (family,
-                                                                                                  DEFAULT_FONT_FAMILY), exc_info=True)
-            mpl_font = font_manager.FontProperties(family=DEFAULT_FONT_FAMILY)
-            font_file = font_manager.findfont(mpl_font)
-            return ImageFont.truetype(font_file, size)
-
     def _initialize(self):
         """
         Initializes colors etc.
@@ -135,7 +114,7 @@ class AnnotationOverlayOD(
         self._colors = dict()
         self._default_colors = default_colors()
         self._default_colors_index = 0
-        self._font = self._load_font(self.font_family, self.font_size)
+        self._font = load_font(self.logger, self.font_family, self.font_size)
         self._text_vertical, self._text_horizontal = self.text_placement.upper().split(",")
         self._accepted_labels = None
         if len(self.labels) > 0:

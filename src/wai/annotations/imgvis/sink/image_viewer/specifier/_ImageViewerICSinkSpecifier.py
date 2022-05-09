@@ -5,7 +5,7 @@ from wai.annotations.core.domain import DomainSpecifier
 from wai.annotations.core.specifier import SinkStageSpecifier
 
 
-class ImageViewerSinkSpecifier(SinkStageSpecifier):
+class ImageViewerICSinkSpecifier(SinkStageSpecifier):
     """
     Specifies the image viewer sink.
     """
@@ -14,12 +14,12 @@ class ImageViewerSinkSpecifier(SinkStageSpecifier):
         return "Displays images."
 
     """
-    Specifier for label-dist in the object-detection domain.
+    Specifier for label-dist in the image classification domain.
     """
     @classmethod
     def domain(cls) -> Type[DomainSpecifier]:
-        from wai.annotations.domain.image.object_detection import ImageObjectDetectionDomainSpecifier
-        return ImageObjectDetectionDomainSpecifier
+        from wai.annotations.domain.image.classification import ImageClassificationDomainSpecifier
+        return ImageClassificationDomainSpecifier
 
     @classmethod
     def components(cls) -> Tuple[Type[Component], ...]:

@@ -183,8 +183,6 @@ DARK_COLORS = [
     "#000080",
 ]
 
-DEFAULT_FONT_FAMILY = "sans\\-serif"
-
 
 def rgb2yiq(r, g, b):
     """
