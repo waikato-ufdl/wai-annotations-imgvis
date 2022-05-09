@@ -43,6 +43,7 @@ setup(
         "wai.annotations.plugins": [
             # ISPs
             "add-annotation-overlay-ic=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayICISPSpecifier",
+            "add-annotation-overlay-is=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayISISPSpecifier",
             "add-annotation-overlay-od=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayODISPSpecifier",
             # Sinks
             "image-viewer-ic=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerICSinkSpecifier",

@@ -81,7 +81,7 @@ class AnnotationOverlayOD(
         "--outline-alpha",
         type=int,
         default=255,
-        help="the alpha value to use for the outline."
+        help="the alpha value to use for the outline (0: transparent, 255: opaque)."
     )
 
     fill: bool = FlagOption(
@@ -93,7 +93,7 @@ class AnnotationOverlayOD(
         "--fill-alpha",
         type=int,
         default=128,
-        help="the alpha value to use for the filling."
+        help="the alpha value to use for the filling (0: transparent, 255: opaque)."
     )
 
     vary_colors: bool = FlagOption(

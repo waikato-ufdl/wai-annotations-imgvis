@@ -1,2 +1,3 @@
 from ._AnnotationOverlayIC import AnnotationOverlayIC
+from ._AnnotationOverlayIS import AnnotationOverlayIS
 from ._AnnotationOverlayOD import AnnotationOverlayOD

@@ -27,6 +27,22 @@ optional arguments:
                         the position of the label (X,Y).
 ```
 
+### ADD-ANNOTATION-OVERLAY-IS
+Adds the image segmentation annotations on top of images passing through.
+
+#### Domain(s):
+- **Image Segmentation Domain**
+
+#### Options:
+```
+usage: add-annotation-overlay-is [--alpha ALPHA] [--colors COLORS] [--labels LABELS]
+
+optional arguments:
+  --alpha ALPHA    the alpha value to use for overlaying the annotations (0: transparent, 255: opaque).
+  --colors COLORS  the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors
+  --labels LABELS  the comma-separated list of labels of annotations to overlay, leave empty to overlay all
+```
+
 ### ADD-ANNOTATION-OVERLAY-OD
 Adds object detection overlays to images passing through.
 
@@ -40,7 +56,7 @@ usage: add-annotation-overlay-od [--fill] [--fill-alpha FILL_ALPHA] [--font-fami
 optional arguments:
   --fill                whether to fill the bounding boxes/polygons
   --fill-alpha FILL_ALPHA
-                        the alpha value to use for the filling.
+                        the alpha value to use for the filling (0: transparent, 255: opaque).
   --font-family FONT_FAMILY
                         the name of the TTF font-family to use, note: any hyphens need escaping with backslash.
   --font-size FONT_SIZE
@@ -52,7 +68,7 @@ optional arguments:
   --num-decimals NUM_DECIMALS
                         the number of decimals to use for float numbers in the text format string.
   --outline-alpha OUTLINE_ALPHA
-                        the alpha value to use for the outline.
+                        the alpha value to use for the outline (0: transparent, 255: opaque).
   --outline-thickness OUTLINE_THICKNESS
                         the line thickness to use for the outline, <1 to turn off.
   --text-format TEXT_FORMAT
@@ -62,13 +78,13 @@ optional arguments:
   --vary-colors         whether to vary the colors of the outline/filling regardless of label
 ```
 
-## IMAGE-VIEWER-IC
+### IMAGE-VIEWER-IC
 Displays images.
 
-### Domain(s):
+#### Domain(s):
 - **Image Classification Domain**
 
-### Options:
+#### Options:
 ```
 usage: image-viewer-ic [--delay DELAY] [--position POSITION] [--size SIZE] [--title TITLE]
 
@@ -79,13 +95,13 @@ optional arguments:
   --title TITLE        the title for the window
 ```
 
-# IMAGE-VIEWER-IS
+### IMAGE-VIEWER-IS
 Displays images.
 
-### Domain(s):
+#### Domain(s):
 - **Image Segmentation Domain**
 
-### Options:
+#### Options:
 ```
 usage: image-viewer-is [--delay DELAY] [--position POSITION] [--size SIZE] [--title TITLE]
 
@@ -96,13 +112,13 @@ optional arguments:
   --title TITLE        the title for the window
 ```
 
-## IMAGE-VIEWER-OD
+### IMAGE-VIEWER-OD
 Displays images.
 
-### Domain(s):
+#### Domain(s):
 - **Image Object-Detection Domain**
 
-### Options:
+#### Options:
 ```
 usage: image-viewer-od [--delay DELAY] [--position POSITION] [--size SIZE] [--title TITLE]
 

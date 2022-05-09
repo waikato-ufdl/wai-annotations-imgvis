@@ -1,2 +1,3 @@
 from ._AnnotationOverlayICISPSpecifier import AnnotationOverlayICISPSpecifier
+from ._AnnotationOverlayISISPSpecifier import AnnotationOverlayISISPSpecifier
 from ._AnnotationOverlayODISPSpecifier import AnnotationOverlayODISPSpecifier
