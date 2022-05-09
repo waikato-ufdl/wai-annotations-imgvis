@@ -5,4 +5,5 @@ Changelog
 ------------------
 
 - Initial release: add-annotation-overlay-(ic/is/od), image-viewer-(ic/is/od)
+- Received to-annotation-overlay-od from wai.annotations.imgstats
 

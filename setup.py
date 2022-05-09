@@ -49,6 +49,7 @@ setup(
             "image-viewer-ic=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerICSinkSpecifier",
             "image-viewer-is=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerISSinkSpecifier",
             "image-viewer-od=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerODSinkSpecifier",
+            "to-annotation-overlay-od=wai.annotations.imgvis.sink.annotation_overlay.specifier:AnnotationOverlayODOutputFormatSpecifier",
         ]
     }
 )
