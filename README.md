@@ -14,9 +14,14 @@ Adds the image classification label on top of images passing through.
 
 #### Options:
 ```
-usage: add-annotation-overlay-ic [--font-color FONT_COLOR] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--position TEXT_PLACEMENT]
+usage: add-annotation-overlay-ic [--background-color BACKGROUND_COLOR] [--background-margin BACKGROUND_MARGIN] [--fill-background] [--font-color FONT_COLOR] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--position TEXT_PLACEMENT]
 
 optional arguments:
+  --background-color BACKGROUND_COLOR
+                        the RGB color triplet to use for the background.
+  --background-margin BACKGROUND_MARGIN
+                        the margin in pixels around the background.
+  --fill-background     whether to fill the background of the text with the specified color.
   --font-color FONT_COLOR
                         the RGB color triplet to use for the font.
   --font-family FONT_FAMILY

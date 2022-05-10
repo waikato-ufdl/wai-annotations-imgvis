@@ -3,7 +3,7 @@ import PIL
 
 from PIL import ImageDraw
 
-from wai.common.cli.options import TypedOption
+from wai.common.cli.options import TypedOption, FlagOption
 from wai.annotations.core.component import ProcessorComponent
 from wai.annotations.core.stream import ThenFunction, DoneFunction
 from wai.annotations.core.stream.util import RequiresNoFinalisation
@@ -48,6 +48,25 @@ class AnnotationOverlayIC(
         help="the RGB color triplet to use for the font."
     )
 
+    fill_background: str = FlagOption(
+        "--fill-background",
+        help="whether to fill the background of the text with the specified color."
+    )
+
+    background_color: str = TypedOption(
+        "--background-color",
+        type=str,
+        default="0,0,0",
+        help="the RGB color triplet to use for the background."
+    )
+
+    background_margin: int = TypedOption(
+        "--background-margin",
+        type=int,
+        default=2,
+        help="the margin in pixels around the background."
+    )
+
     def _initialize(self):
         """
         Initializes colors etc.
@@ -55,6 +74,7 @@ class AnnotationOverlayIC(
         self._colors = dict()
         self._font = load_font(self.logger, self.font_family, self.font_size)
         self._font_color = tuple([int(x) for x in self.font_color.split(",")])
+        self._background_color = tuple([int(x) for x in self.background_color.split(",")])
         self._text_x, self._text_y = [int(x) for x in self.text_placement.upper().split(",")]
 
     def process_element(
@@ -71,7 +91,22 @@ class AnnotationOverlayIC(
 
         overlay = PIL.Image.new('RGBA', img_pil.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
+
+        # background?
+        if self.fill_background:
+            w, h = draw.textsize(element.annotations.label, font=self._font)
+            draw.rectangle(
+                (
+                    self._text_x - self.background_margin,
+                    self._text_y - self.background_margin,
+                    self._text_x + w + self.background_margin*2,
+                    self._text_y + h + self.background_margin*2
+                ),
+                fill=self._background_color)
+
+        # label
         draw.text((self._text_x, self._text_y), element.annotations.label, font=self._font, fill=self._font_color)
+
         img_pil.paste(overlay, (0, 0), mask=overlay)
 
         # convert back to PIL bytes
