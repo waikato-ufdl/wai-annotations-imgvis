@@ -37,7 +37,7 @@ setup(
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
     install_requires=[
-        "wai.annotations.core>=0.1.1",
+        "wai.annotations.core>=0.1.6",
     ],
     entry_points={
         "wai.annotations.plugins": [
