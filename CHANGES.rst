@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.0.3 (????-??-??)
+------------------
+
+- added `combine-annotations-od` for combining overlapping annotations between images into single annotation
+- ...
+
+
 1.0.2 (2022-05-11)
 ------------------
 

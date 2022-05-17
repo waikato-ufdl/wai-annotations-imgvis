@@ -38,6 +38,7 @@ setup(
     author_email='fracpete@waikato.ac.nz',
     install_requires=[
         "wai.annotations.core>=0.1.6",
+        "Shapely",
     ],
     entry_points={
         "wai.annotations.plugins": [
@@ -45,6 +46,7 @@ setup(
             "add-annotation-overlay-ic=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayICISPSpecifier",
             "add-annotation-overlay-is=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayISISPSpecifier",
             "add-annotation-overlay-od=wai.annotations.imgvis.isp.annotation_overlay.specifier:AnnotationOverlayODISPSpecifier",
+            "combine-annotations-od=wai.annotations.imgvis.isp.combine_annotations.specifier:CombineAnnotationsODISPSpecifier",
             # Sinks
             "image-viewer-ic=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerICSinkSpecifier",
             "image-viewer-is=wai.annotations.imgvis.sink.image_viewer.specifier:ImageViewerISSinkSpecifier",

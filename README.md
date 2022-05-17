@@ -84,6 +84,23 @@ optional arguments:
   --vary-colors         whether to vary the colors of the outline/filling regardless of label
 ```
 
+## COMBINE-ANNOTATIONS-OD
+Combines object detection annotations from images passing through into a single annotation.
+
+### Domain(s):
+- **Image Object-Detection Domain**
+
+### Options:
+```
+usage: combine-annotations-od [--combination COMBINATION] [--min-iou MIN_IOU]
+
+optional arguments:
+  --combination COMBINATION
+                        how to combine the annotations (union|intersect); the 'stream_index' key in the meta-data contains the stream index
+  --min-iou MIN_IOU     the minimum IoU (intersect over union) to use for identifying objects that overlap
+```
+
+
 ### IMAGE-VIEWER-IC
 Displays images.
 
