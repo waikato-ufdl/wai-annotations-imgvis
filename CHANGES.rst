@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - added `combine-annotations-od` for combining overlapping annotations between images into single annotation
+- `add-annotation-overlay-is/od` now use `narg='+'` for `--labels` and `--colors` options instead of comma-separated single argument
 - ...
 
 

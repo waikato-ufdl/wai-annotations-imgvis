@@ -1,7 +1,7 @@
 import io
-import numpy as np
 import PIL
 
+from typing import List
 from PIL import ImageDraw
 
 from wai.common.cli.options import TypedOption
@@ -21,13 +21,11 @@ class AnnotationOverlayIS(
     Stream processor which adds image classification labels on top of images.
     """
 
-    BYTE_PLACE_MULTIPLIER = np.array([list(1 << i for i in reversed(range(8)))], np.uint8)
-
-    labels: str = TypedOption(
+    labels: List[str] = TypedOption(
         "--labels",
         type=str,
-        default="",
-        help="the comma-separated list of labels of annotations to overlay, leave empty to overlay all"
+        nargs="+",
+        help="the labels of annotations to overlay, overlays all if omitted"
     )
 
     alpha: int = TypedOption(
@@ -37,11 +35,11 @@ class AnnotationOverlayIS(
         help="the alpha value to use for overlaying the annotations (0: transparent, 255: opaque)."
     )
 
-    colors: str = TypedOption(
+    colors: List[str] = TypedOption(
         "--colors",
         type=str,
-        default="",
-        help="the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors"
+        nargs="+",
+        help="the RGB triplets (R,G,B) of custom colors to use, uses default colors if not supplied"
     )
 
     def _initialize(self):
@@ -52,12 +50,12 @@ class AnnotationOverlayIS(
         self._default_colors = default_colors()
         self._default_colors_index = 0
         self._custom_colors = []
-        if len(self.colors) > 0:
-            for color in self.colors.split(" "):
+        if self.colors is not None:
+            for color in self.colors:
                 self._custom_colors.append([int(x) for x in color.split(",")])
         self._accepted_labels = None
-        if len(self.labels) > 0:
-            self._accepted_labels = set(self.labels.split(","))
+        if (self.labels is not None) and (len(self.labels) > 0):
+            self._accepted_labels = set(self.labels)
 
     def _next_default_color(self):
         """

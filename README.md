@@ -40,12 +40,14 @@ Adds the image segmentation annotations on top of images passing through.
 
 #### Options:
 ```
-usage: add-annotation-overlay-is [--alpha ALPHA] [--colors COLORS] [--labels LABELS]
+usage: add-annotation-overlay-is [--alpha ALPHA] [--colors COLORS [COLORS ...]] [--labels LABELS [LABELS ...]]
 
 optional arguments:
-  --alpha ALPHA    the alpha value to use for overlaying the annotations (0: transparent, 255: opaque).
-  --colors COLORS  the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors
-  --labels LABELS  the comma-separated list of labels of annotations to overlay, leave empty to overlay all
+  --alpha ALPHA         the alpha value to use for overlaying the annotations (0: transparent, 255: opaque). (default: 64)
+  --colors COLORS [COLORS ...]
+                        the RGB triplets (R,G,B) of custom colors to use, uses default colors if not supplied (default: [])
+  --labels LABELS [LABELS ...]
+                        the labels of annotations to overlay, overlays all if omitted (default: [])
 ```
 
 ### ADD-ANNOTATION-OVERLAY-OD
@@ -56,41 +58,43 @@ Adds object detection overlays to images passing through.
 
 #### Options:
 ```
-usage: add-annotation-overlay-od [--colors COLORS] [--fill] [--fill-alpha FILL_ALPHA] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--force-bbox] [--label-key LABEL_KEY] [--labels LABELS] [--num-decimals NUM_DECIMALS] [--outline-alpha OUTLINE_ALPHA] [--outline-thickness OUTLINE_THICKNESS] [--text-format TEXT_FORMAT] [--text-placement TEXT_PLACEMENT] [--vary-colors]
+usage: add-annotation-overlay-od [--colors COLORS [COLORS ...]] [--fill] [--fill-alpha FILL_ALPHA] [--font-family FONT_FAMILY] [--font-size FONT_SIZE] [--force-bbox] [--label-key LABEL_KEY] [--labels LABELS [LABELS ...]] [--num-decimals NUM_DECIMALS] [--outline-alpha OUTLINE_ALPHA] [--outline-thickness OUTLINE_THICKNESS] [--text-format TEXT_FORMAT] [--text-placement TEXT_PLACEMENT] [--vary-colors]
 
 optional arguments:
-  --colors COLORS       the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors
-  --fill                whether to fill the bounding boxes/polygons
+  --colors COLORS [COLORS ...]
+                        the RGB triplets (R,G,B) of custom colors to use, uses default colors if not supplied (default: [])
+  --fill                whether to fill the bounding boxes/polygons (default: False)
   --fill-alpha FILL_ALPHA
-                        the alpha value to use for the filling (0: transparent, 255: opaque).
+                        the alpha value to use for the filling (0: transparent, 255: opaque). (default: 128)
   --font-family FONT_FAMILY
-                        the name of the TTF font-family to use, note: any hyphens need escaping with backslash.
+                        the name of the TTF font-family to use, note: any hyphens need escaping with backslash. (default: sans\-serif)
   --font-size FONT_SIZE
-                        the size of the font.
-  --force-bbox          whether to force a bounding box even if there is a polygon available
+                        the size of the font. (default: 14)
+  --force-bbox          whether to force a bounding box even if there is a polygon available (default: False)
   --label-key LABEL_KEY
-                        the key in the meta-data that contains the label.
-  --labels LABELS       the comma-separated list of labels of annotations to overlay, leave empty to overlay all
+                        the key in the meta-data that contains the label. (default: type)
+  --labels LABELS [LABELS ...]
+                        the labels of annotations to overlay, overlays all if omitted (default: [])
   --num-decimals NUM_DECIMALS
-                        the number of decimals to use for float numbers in the text format string.
+                        the number of decimals to use for float numbers in the text format string. (default: 3)
   --outline-alpha OUTLINE_ALPHA
-                        the alpha value to use for the outline (0: transparent, 255: opaque).
+                        the alpha value to use for the outline (0: transparent, 255: opaque). (default: 255)
   --outline-thickness OUTLINE_THICKNESS
-                        the line thickness to use for the outline, <1 to turn off.
+                        the line thickness to use for the outline, <1 to turn off. (default: 3)
   --text-format TEXT_FORMAT
-                        template for the text to print on top of the bounding box or polygon, '{PH}' is a placeholder for the 'PH' value from the meta-data or 'label' for the current label; ignored if empty.
+                        template for the text to print on top of the bounding box or polygon, '{PH}' is a placeholder for the 'PH' value from the meta-data or 'label' for the current label; ignored if empty. (default: {label})
   --text-placement TEXT_PLACEMENT
-                        comma-separated list of vertical (T=top, C=center, B=bottom) and horizontal (L=left, C=center, R=right) anchoring.
-  --vary-colors         whether to vary the colors of the outline/filling regardless of label
+                        comma-separated list of vertical (T=top, C=center, B=bottom) and horizontal (L=left, C=center, R=right) anchoring. (default: T,L)
+  --vary-colors         whether to vary the colors of the outline/filling regardless of label (default: False)
 ```
 
-## COMBINE-ANNOTATIONS-OD
+### COMBINE-ANNOTATIONS-OD
 Combines object detection annotations from images passing through into a single annotation.
 
-### Domain(s):
+#### Domain(s):
 - **Image Object-Detection Domain**
 
-### Options:
+#### Options:
 ```
 usage: combine-annotations-od [--combination COMBINATION] [--min-iou MIN_IOU]
 

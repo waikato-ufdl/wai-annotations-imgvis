@@ -1,6 +1,7 @@
 import io
 import PIL
 
+from typing import List
 from PIL import ImageDraw
 
 from wai.common.cli.options import TypedOption, FlagOption
@@ -21,11 +22,11 @@ class AnnotationOverlayOD(
     Stream processor which adds object detections overlays to images.
     """
 
-    labels: str = TypedOption(
+    labels: List[str] = TypedOption(
         "--labels",
         type=str,
-        default="",
-        help="the comma-separated list of labels of annotations to overlay, leave empty to overlay all"
+        nargs="+",
+        help="the labels of annotations to overlay, overlays all if omitted"
     )
 
     label_key: str = TypedOption(
@@ -70,11 +71,11 @@ class AnnotationOverlayOD(
         help="the number of decimals to use for float numbers in the text format string."
     )
 
-    colors: str = TypedOption(
+    colors: List[str] = TypedOption(
         "--colors",
         type=str,
-        default="",
-        help="the blank-separated list of RGB triplets (R,G,B) of custom colors to use, leave empty for default colors"
+        nargs="+",
+        help="the RGB triplets (R,G,B) of custom colors to use, uses default colors if not supplied"
     )
 
     outline_thickness: int = TypedOption(
@@ -84,7 +85,7 @@ class AnnotationOverlayOD(
         help="the line thickness to use for the outline, <1 to turn off."
     )
 
-    outline_alpha: str = TypedOption(
+    outline_alpha: int = TypedOption(
         "--outline-alpha",
         type=int,
         default=255,
@@ -96,7 +97,7 @@ class AnnotationOverlayOD(
         help="whether to fill the bounding boxes/polygons"
     )
 
-    fill_alpha: str = TypedOption(
+    fill_alpha: int = TypedOption(
         "--fill-alpha",
         type=int,
         default=128,
@@ -121,15 +122,15 @@ class AnnotationOverlayOD(
         self._default_colors = default_colors()
         self._default_colors_index = 0
         self._custom_colors = []
-        if len(self.colors) > 0:
-            for color in self.colors.split(" "):
+        if self.colors is not None:
+            for color in self.colors:
                 self._custom_colors.append([int(x) for x in color.split(",")])
         self._label_mapping = dict()
         self._font = load_font(self.logger, self.font_family, self.font_size)
         self._text_vertical, self._text_horizontal = self.text_placement.upper().split(",")
         self._accepted_labels = None
-        if len(self.labels) > 0:
-            self._accepted_labels = set(self.labels.split(","))
+        if (self.labels is not None) and (len(self.labels) > 0):
+            self._accepted_labels = set(self.labels)
 
     def _next_default_color(self):
         """
