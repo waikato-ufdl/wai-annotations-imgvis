@@ -50,11 +50,15 @@ def intersect_over_union(poly1, poly2):
     :return: the IoU
     :type: float
     """
-    intersection = poly2.intersection(poly1)
-    if intersection.area > 0:
-        union = unary_union([poly2, poly1])
-        return intersection.area / union.area
-    else:
+    try:
+        intersection = poly2.intersection(poly1)
+        if intersection.area > 0:
+                union = unary_union([poly2, poly1])
+                return intersection.area / union.area
+        else:
+            return 0
+    except:
+        print("Failed to compute IoU!")
         return 0
 
 
