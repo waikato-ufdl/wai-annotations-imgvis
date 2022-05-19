@@ -1,5 +1,5 @@
 from shapely.geometry import Polygon, GeometryCollection, MultiPolygon
-from shapely.ops import cascaded_union
+from shapely.ops import unary_union
 
 from wai.common.cli.options import TypedOption
 from wai.common.geometry import Polygon as WaiPolygon
@@ -52,7 +52,7 @@ def intersect_over_union(poly1, poly2):
     """
     intersection = poly2.intersection(poly1)
     if intersection.area > 0:
-        union = cascaded_union([poly2, poly1])
+        union = unary_union([poly2, poly1])
         return intersection.area / union.area
     else:
         return 0
@@ -142,32 +142,36 @@ class CombineAnnotationsOD(
             else:
                 # combine polygons
                 if self.combination == UNION:
-                    poly_comb = cascaded_union([polygons_new[n], polygons_old[o]])
+                    poly_comb = unary_union([polygons_new[n], polygons_old[o]])
                 elif self.combination == INTERSECT:
                     poly_comb = polygons_new[n].intersection(polygons_old[o])
                 else:
                     raise Exception("Unknown combination method: %s" % self.combination)
                 # grab the first polygon
                 if isinstance(poly_comb, GeometryCollection):
-                    for x in poly_comb:
+                    for x in poly_comb.geoms:
                         if isinstance(x, Polygon):
                             poly_comb = x
                             break
                 elif isinstance(poly_comb, MultiPolygon):
-                    for x in poly_comb:
+                    for x in poly_comb.geoms:
                         if isinstance(x, Polygon):
                             poly_comb = x
                             break
-                # create new located object
-                minx, miny, maxx, maxy = [int(x) for x in poly_comb.bounds]
-                x_list, y_list = poly_comb.exterior.coords.xy
-                points = []
-                for i in range(len(x_list)):
-                    points.append(WaiPoint(x=x_list[i], y=y_list[i]))
-                lobj = LocatedObject(minx, miny, maxx - minx + 1, maxy - miny + 1)
-                lobj.set_polygon(WaiPolygon(*points))
-                lobj.metadata[STREAM_INDEX] = self._stream_index
-                combined.append(lobj)
+
+                if isinstance(poly_comb, Polygon):
+                    # create new located object
+                    minx, miny, maxx, maxy = [int(x) for x in poly_comb.bounds]
+                    x_list, y_list = poly_comb.exterior.coords.xy
+                    points = []
+                    for i in range(len(x_list)):
+                        points.append(WaiPoint(x=x_list[i], y=y_list[i]))
+                    lobj = LocatedObject(minx, miny, maxx - minx + 1, maxy - miny + 1)
+                    lobj.set_polygon(WaiPolygon(*points))
+                    lobj.metadata[STREAM_INDEX] = self._stream_index
+                    combined.append(lobj)
+                else:
+                    self.logger.warning("Unhandled geometry type returned from combination, skipping: %s" % str(type(poly_comb)))
 
         self._annotations = LocatedObjects(combined)
 
