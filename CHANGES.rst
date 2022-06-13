@@ -1,12 +1,11 @@
 Changelog
 =========
 
-1.0.3 (????-??-??)
+1.0.3 (2022-06-13)
 ------------------
 
 - added `combine-annotations-od` for combining overlapping annotations between images into single annotation
 - `add-annotation-overlay-is/od` now use `narg='+'` for `--labels` and `--colors` options instead of comma-separated single argument
-- ...
 
 
 1.0.2 (2022-05-11)
