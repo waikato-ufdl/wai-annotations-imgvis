@@ -221,7 +221,14 @@ class AnnotationOverlayOD(
         :return: the x, y, w, h tuple
         :rtype: tuple
         """
-        w, h = draw.textsize(text, font=self._font)
+        try:
+            w, h = draw.textsize(text, font=self._font)
+        except:
+            # newer versions of Pillow deprecated ImageDraw.textsize
+            # https://levelup.gitconnected.com/how-to-properly-calculate-text-size-in-pil-images-17a2cc6f51fd
+            ascent, descent = self._font.getmetrics()
+            w = self._font.getmask(text).getbbox()[2]
+            h = self._font.getmask(text).getbbox()[3] + descent
 
         # x
         if self._text_horizontal == "L":
